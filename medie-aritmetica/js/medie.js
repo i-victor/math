@@ -1,27 +1,6 @@
 
 // file: medie.js
 
-/*
-var A = [
-
-	{
-		id: "obj1",
-		val: 3
-	},
-
-	{
-		id: "obj2",
-		val: 7
-	},
-
-	{
-		id: "obj3",
-		val: 15
-	}
-
-];
-*/
-
 function calculeazaMedia() {
 
 	var A = document.getElementsByTagName('input'); // luam multimea de elemente de tip input din pagina HTML
