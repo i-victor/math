@@ -51,5 +51,7 @@ function stergeUltimulInput() {
 
 } //END FUNCTION
 
+//====================================================
+
 
 // #end js
