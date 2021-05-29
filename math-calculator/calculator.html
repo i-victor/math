@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<script src="jquery.min.js"></script>
+<script>
+function solveSqrts(str) {
+	return str.replaceAll(/√([0-9\.]+)/g, 'Math.sqrt($1)');
+}
+function solvePows(str) {
+	return str.replaceAll(/(\-?[0-9\.]+)\^(\-?[0-9]+)/g, 'Math.pow($1,$2)');
+}
+function solveSins(str) {
+	return str.replaceAll(/sin\:(\-?[0-9\.]+)/g, 'Math.sin($1)');
+}
+function solveCos(str) {
+	return str.replaceAll(/cos\:(\-?[0-9\.]+)/g, 'Math.cos($1)');
+}
+function solveTan(str) {
+	return str.replaceAll(/tan\:(\-?[0-9\.]+)/g, 'Math.tan($1)');
+}
+function solveLog(str) {
+	return str.replaceAll(/log\:(\-?[0-9\.]+)/g, 'Math.log($1)');
+}
+function solveExp(str) {
+	return str.replaceAll(/exp\:(\-?[0-9\.]+)/g, 'Math.exp($1)');
+}
+function solveLn(str) {
+	return str.replaceAll(/ln\:(\-?[0-9\.]+)/g, 'Math.ln($1)');
+}
+function solveAbs(str) {
+	return str.replaceAll(/abs\:(\-?[0-9\.]+)/g, 'Math.abs($1)');
+}
+function solveTrunc(str) {
+	return str.replaceAll(/trunc\:(\-?[0-9\.]+)/g, 'Math.trunc($1)');
+}
+function dis(val) { // function that display value
+	const $field = $('#result');
+	let oldVal = $field.val();
+	$field.val(String(oldVal) + String(val));
+}
+function reverse_num() {
+	let currentVal = document.getElementById("result").value
+	let y = eval(-currentVal)
+	document.getElementById("result").value = y
+}
+solve = () => { // function that evaluates the digit and return result
+	const $field = $('#result');
+	let x = $field.val();
+	let y;
+	console.log('Input:', x);
+	x = solveSqrts(x);
+	x = solvePows(x);
+	x = solveSins(x);
+	x = solveCos(x);
+	x = solveTan(x);
+	x = solveLog(x);
+	x = solveExp(x);
+	x = solveLn(x);
+	x = solveAbs(x);
+	x = solveTrunc(x);
+	console.log('Solving:', x);
+	try {
+		y = eval(x);
+	} catch(err) {
+		y = 'ERR: ' + err;
+	}
+	$field.val(y);
+}
+clr = () => { // function that clear the display
+	$('#result').val('');
+}
+pi = () => {
+	dis(Math.PI);
+}
+e = () => {
+	dis(Math.E);
+}
+</script>
+<!-- for styling -->
+<style>
+.tabel {
+	width: 300px;
+	border: 2px solid black;
+}
+ input[type="button"] {
+	background-color: black;
+	color: white;
+	border: solid black 2px;
+	width: 100%;
+ }
+input[type="text"] {
+	background-color:white;
+	border: solid black 2px;
+	width: calc(100% - 4px);
+	font-weight: bold;
+}
+#egal {
+	background-color: orange;
+	color: white;
+	width: 195%;
+}
+#plus {
+	background-color: orange;
+	color: white;
+}
+#minus {
+	background-color: orange;
+	color: white;
+}
+#ori {
+	background-color: orange;
+	color: white;
+}
+#impartit {
+	background-color: orange;
+	color: white;
+}
+#plus_minus {
+	background-color: orange;
+	color: white;
+}
+#putere {
+	background-color: orange;
+	color: white;
+}
+#radical {
+	background-color: orange;
+	color: white;
+}
+#AC {
+	background-color: orange;
+	color: white;
+}
+#exp {
+	background-color: grey;
+	color: white;
+}
+#log {
+	background-color: grey;
+	color: white;
+}
+#e {
+	background-color: grey;
+	color: white;
+}
+#pi {
+	background-color: grey;
+	color: white;
+}
+#sin {
+	background-color: grey;
+	color: white;
+}
+#cos {
+	background-color: grey;
+	color: white;
+}
+#tan {
+	background-color: grey;
+	color: white;
+}
+#abs {
+	background-color: grey;
+	color: white;
+}
+</style>
+</head>
+<body>
+	<table class="tabel" align="center">
+		<tr>
+			<td colspan="3"><input type="text" id="result" autocomplete="off" readonly></td>
+			<!-- clr() function will call clr to clear all value -->
+			<td><input type="button" value="AC" id="AC" onclick="clr()"> </td>
+		</tr>
+<tr>
+			<td><input type="button" id="exp" value="exp" onclick="dis('exp:')"> </td>
+			<td><input type="button" id="log" value="log" onclick="dis('log:')"> </td>
+			<td><input type="button" id="e" value="e" onclick="e()"> </td>
+			<td><input type="button" id="pi" value="𝜋" onclick="pi()"> </td>
+</tr>
+<tr>
+			<td><input type="button" id="sin" value="sin" onclick="dis('sin:')"> </td>
+			<td><input type="button" id="cos" value="cos" onclick="dis('cos:')"></td>
+			<td><input type="button" id="tan" value="tan" onclick="dis('tan:')"></td>
+			<td><input type="button" id="abs" value="abs" onclick="dis('abs:')"> </td>
+</tr>
+		<tr>
+			<td><input type="button" value="√" id="radical" onclick="dis('√')"> </td>
+			<td><input type="button" value="^" id="putere" onclick="dis('^')"> </td>
+			<td><input type="button" id="plus_minus" value="+/-" onclick="reverse_num()"> </td>
+			<td><input type="button" id="impartit" value="÷" onclick="dis('/')"> </td>
+		</tr>
+		 <tr>
+			<td><input type="button" value="7" onclick="dis('7')"> </td>
+			<td><input type="button" value="8" onclick="dis('8')"> </td>
+			<td><input type="button" value="9" onclick="dis('9')"> </td>
+			<td><input type="button" id="ori" value="×" onclick="dis('*')"> </td>
+		 </tr>
+		 <tr>
+			<td><input type="button" value="4" onclick="dis('4')"> </td>
+			<td><input type="button" value="5" onclick="dis('5')"> </td>
+			<td><input type="button" value="6" onclick="dis('6')"> </td>
+			<td><input type="button" id="minus" value="-" onclick="dis('-')"> </td>
+		 </tr>
+		 <tr>
+			<td><input type="button" value="1" onclick="dis('1')"> </td>
+			<td><input type="button" value="2" onclick="dis('2')"> </td>
+			<td><input type="button" value="3" onclick="dis('3')"> </td>
+			<td><input type="button" id="plus" value="+" onclick="dis('+')"> </td>
+		 </tr>
+		 <tr>
+			<td><input type="button" value="0" onclick="dis('0')"> </td>
+			<td><input type="button" value="." onclick="dis('.')"> </td>
+			<!-- solve function call function solve to evaluate value -->
+			<td><input type="button" id="egal" value="=" onclick="solve()"> </td>
+		 </tr>
+	  </table>
+</body>
+</html>
